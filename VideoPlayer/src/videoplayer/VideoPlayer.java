@@ -1,33 +1,29 @@
 package videoplayer;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import Console.*;
+import Utilities.*;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
-import javax.media.ControllerEvent;
-import javax.media.ControllerListener;
-import javax.media.Manager;
-import javax.media.Player;
-import javax.media.RealizeCompleteEvent;
+import javax.media.*;
 import javax.swing.*;
 
 /**
  *
  * @author Jun
  */
-public class VideoPlayer extends javax.swing.JFrame implements ActionListener, ControllerListener{
+public class VideoPlayer extends javax.swing.JFrame implements ActionListener, ControllerListener, IVideoPlayer{
 
     private File _file;
-    private IConsole _console;
+    private final IConsole _console;
     private Player _player;
     
     public VideoPlayer() 
     {
-        _console = new Console();
+        _console = new ConsoleFactory().GetConsole();
         initComponents();
     }
 
@@ -73,10 +69,7 @@ public class VideoPlayer extends javax.swing.JFrame implements ActionListener, C
     }//GEN-LAST:event_jMenuItem1ActionPerformed
     
     @Override
-    public void actionPerformed(ActionEvent e) 
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public void actionPerformed(ActionEvent e){}
 
     @Override
     public void controllerUpdate(ControllerEvent ce) 
@@ -107,7 +100,8 @@ public class VideoPlayer extends javax.swing.JFrame implements ActionListener, C
         }
     }
 
-    private void getFile() 
+    @Override
+    public void getFile() 
     {
         try
         {
@@ -126,7 +120,8 @@ public class VideoPlayer extends javax.swing.JFrame implements ActionListener, C
         }
     }
     
-    private void CreateFile() 
+    @Override
+    public void CreateFile() 
     {
         try 
         {
